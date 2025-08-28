@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>403 Forbidden</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.2em;
+      padding: 50px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: flicker 2s infinite alternate;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+
+    a {
+      color: #00ff00;
+      text-decoration: underline;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background-color: #00ff00;
+      margin-left: 5px;
+      animation: blink 1s steps(2, start) infinite;
+      vertical-align: bottom;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      60% { opacity: 1; }
+      70% { opacity: 0.6; }
+      80% { opacity: 1; }
+      90% { opacity: 0.9; }
+      100% { opacity: 1; }
+    }
+
+    /* Optional: subtle scanlines effect */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 255, 0, 0.05) 1px,
+        rgba(0, 0, 0, 0) 2px
+      );
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <h1>403 FORBIDDEN</h1>
+  <p>ACCESS DENIED</p>
+  <p>CONTACT <a href="mailto:cruzy22k@gmail.com">CRUZY22K@GMAIL.COM</a> FOR OVERRIDE</p>
+  <p><span>_</span><span class="cursor"></span></p>
+</body>
+</html>

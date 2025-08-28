@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cruzy22k - My Bio</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+  <style>
+    /* BODY
+       Main page container and font setup */
+    body {
+      font-family: 'Roboto', sans-serif; /* Use Roboto font, fallback sans-serif */
+      line-height: 1.6;                  /* Line height for easier reading */
+      color: #e0e0e0;                   /* Light gray text color */
+      max-width: 780px;                 /* Max width of page for readability */
+      margin: 0 auto;                  /* Center horizontally */
+      padding: 20px;                   /* Space inside edges */
+      background-color: #0a0a0a;       /* Dark black background */
+      transition: background 1.5s ease; /* Smooth transition if bg changes */
+    }
+
+    /* HEADER
+       Container for page title and subtitle */
+    header {
+      background-color: #1e1e1e;       /* Slightly lighter dark gray background */
+      text-align: center;              /* Center align text */
+      padding: 2rem;                  /* Vertical and horizontal padding */
+      border-radius: 10px;            /* Rounded corners */
+      margin-bottom: 20px;            /* Space below header */
+    }
+
+    /* H1 - Main page title */
+    h1 {
+      margin-bottom: 0;               /* Remove default margin below */
+      color: #3498db;                 /* Bright blue color */
+    }
+
+    /* Subtitle under the main title */
+    .subtitle {
+      font-style: italic;             /* Italic text */
+      margin-top: 0.5rem;             /* Small space above */
+      color: #bbb;                   /* Medium gray color */
+    }
+
+    /* SECTION
+       Generic container for each info block */
+    section {
+      background-color: #0d0c0c;       /* Very dark background slightly lighter than body */
+      margin: 20px 0;                  /* Vertical spacing between sections */
+      padding: 20px;                   /* Inner spacing */
+      border-radius: 10px;             /* Rounded corners */
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Subtle shadow for depth */
+      transition: transform 0.2s ease; /* Smooth transform on hover */
+    }
+
+    /* Section hover effect */
+    section:hover {
+      transform: translateY(-3px);    /* Slight upward lift */
+    }
+
+    /* H2 - Section titles */
+    h2 {
+      color: #3498db;                 /* Bright blue */
+      border-bottom: 2px solid #3498db; /* Blue underline */
+      padding-bottom: 5px;             /* Space below text for underline */
+    }
+
+    /* Container for skills badges */
+    .skills {
+      display: flex;                  /* Flex layout for horizontal flow */
+      flex-wrap: wrap;               /* Wrap to new line if needed */
+      gap: 10px;                     /* Spacing between badges */
+    }
+
+    /* Each skill badge */
+    .skill {
+      background-color: #3498db;     /* Blue background */
+      color: #fff;                   /* White text */
+      padding: 8px 15px;             /* Padding inside badge */
+      border-radius: 20px;           /* Pill-shaped rounded corners */
+      font-size: 0.9rem;             /* Slightly smaller text */
+    }
+
+    /* Links styling */
+    a {
+      color: #3498db;                 /* Blue link text */
+      text-decoration: none;          /* Remove underline */
+    }
+
+    /* Links hover effect */
+    a:hover {
+      text-decoration: underline;     /* Underline on hover */
+    }
+
+    /* Button style for redirect buttons */
+    .redirect-button {
+      background-color: #3498db;      /* Blue background */
+      color: white;                   /* White text */
+      padding: 10px 20px;             /* Padding */
+      border: none;                   /* Remove default border */
+      border-radius: 5px;             /* Slight rounding */
+      cursor: pointer;                /* Pointer cursor on hover */
+      font-size: 1rem;                /* Regular font size */
+      transition: background 0.3s;    /* Smooth background color transition */
+    }
+
+    /* Redirect button hover */
+    .redirect-button:hover {
+      background-color: #053859;      /* Darker blue on hover */
+    }
+
+    /* NOW PLAYING CONTAINER
+       Flex container holding album art, info and controls */
+    .now-playing {
+      display: flex;                  /* Flexbox layout */
+      align-items: center;            /* Vertically center items */
+      gap: 15px;                     /* Spacing between children */
+      background-color: #121212;      /* Very dark background */
+      padding: 12px 16px;             /* Inner spacing */
+      border-radius: 12px;            /* Rounded corners */
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.7); /* Blue glow */
+      color: #fff;                   /* White text */
+      max-width: 100%;               /* Full width */
+      user-select: none;             /* Disable text selection */
+    }
+
+    /* Album art image */
+    .album-art {
+      width: 64px;                   /* Fixed size */
+      height: 64px;
+      border-radius: 6px;            /* Rounded corners */
+      background: #222;              /* Dark placeholder bg */
+      flex-shrink: 0;                /* Don’t shrink */
+      object-fit: cover;             /* Cover container fully */
+      transition: opacity 0.5s ease; /* Fade effect */
+    }
+
+    /* Album art loading state */
+    .album-art.loading {
+      opacity: 0.4;                 /* Slightly transparent */
+      filter: blur(1px);            /* Blur effect */
+    }
+
+    /* Container for track info (title & artist) */
+    .track-info {
+      flex: 1;                      /* Take all remaining space */
+      overflow: hidden;             /* Hide overflow text */
+    }
+
+    /* Track title styling */
+    .track-name {
+      font-weight: 700;             /* Bold */
+      font-size: 1.1rem;            /* Larger font */
+      white-space: nowrap;          /* Single line */
+      overflow: hidden;             /* Hide overflow */
+      text-overflow: ellipsis;      /* Show ... if too long */
+      margin: 0;                    /* Remove margin */
+    }
+
+    /* Track artist styling */
+    .track-artist {
+      font-weight: 400;             /* Normal weight */
+      color: #a0a0a0;              /* Grayish text */
+      font-size: 0.95rem;           /* Slightly smaller */
+      white-space: nowrap;          /* Single line */
+      overflow: hidden;             /* Hide overflow */
+      text-overflow: ellipsis;      /* Ellipsis */
+      margin: 2px 0 0 0;            /* Small top margin */
+    }
+
+    /* Controls container for buttons */
+    .controls {
+      display: flex;                /* Flex row */
+      gap: 8px;                    /* Spacing between buttons */
+      flex-shrink: 0;              /* Don’t shrink */
+    }
+
+    /* Individual control buttons */
+    .control-button {
+      background-color: #3498db;    /* Blue background */
+      border: none;                 /* Remove border */
+      border-radius: 6px;           /* Rounded corners */
+      color: white;                 /* White text */
+      font-size: 1.2rem;            /* Larger icons */
+      cursor: pointer;              /* Pointer cursor */
+      padding: 6px 12px;            /* Padding */
+      transition: background-color 0.3s; /* Smooth hover */
+      user-select: none;            /* Disable text selection */
+    }
+
+    /* Hover effect for control buttons */
+    .control-button:hover {
+      background-color: #053859;    /* Darker blue */
+    }
+
+    /* PROGRESS BAR CONTAINER */
+    .progress-container {
+      width: 100%;                 /* Full width */
+      height: 6px;                 /* Thin bar */
+      background-color: #222;       /* Dark gray background */
+      border-radius: 3px;           /* Rounded edges */
+      margin-top: 8px;              /* Space above */
+      overflow: hidden;            /* Hide overflow */
+    }
+
+    /* Progress bar itself */
+    .progress-bar {
+      height: 100%;                /* Fill container height */
+      background-color: #3498db;  /* Blue fill */
+      width: 0%;                  /* Starts empty */
+      transition: width 0.3s ease; /* Smooth width changes */
+    }
+
+    /* Loading spinner */
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.2); /* Light transparent border */
+      border-top: 3px solid #3498db;            /* Blue top border for spinning */
+      border-radius: 50%;                       /* Circle */
+      width: 20px;                              /* Size */
+      height: 20px;
+      animation: spin 1s linear infinite;      /* Continuous spin animation */
+      display: inline-block;                    /* Inline element */
+      vertical-align: middle;                   /* Align with text */
+      margin-left: 8px;                         /* Spacing from left */
+    }
+
+    /* Keyframes for spinner rotation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }           /* Start at 0 degrees */
+      100% { transform: rotate(360deg); }       /* Full rotation */
+    }
+
+    /* RESPONSIVE STYLES FOR SMALL SCREENS */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;                          /* Less padding on mobile */
+      }
+      .now-playing {
+        flex-wrap: wrap;                        /* Wrap items to new line */
+        gap: 10px;                             /* Slightly smaller gap */
+      }
+      .track-info {
+        flex-basis: 100%;                      /* Take full width below album art */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cruzy22k</h1>
+    <p class="subtitle">Beginning Programmer & ChromeOS Security Researcher</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>Hi! I'm Zaki, also known as Cruzy22k or simply Cruzy.</p>
+    <p>I love music, cooking, tennis, photography and some e-sports games.</p>
+    <p>Currently in Yr11.</p>
+  </section>
+
+  <section>
+    <h2>Interests?</h2>
+    <p>I'm interested in computing and networking.</p>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <div class="skills">
+      <span class="skill">Bash Scripting</span>
+      <span class="skill">Basic HTML / CSS</span>
+      <span class="skill">Python</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>🎧 Now Playing</h2>
+    <div class="now-playing">
+      <img src="https://via.placeholder.com/64x64?text=..." alt="Album Art" id="albumArt" class="album-art" />
+      <div class="track-info">
+        <p class="track-name" id="trackName">Loading...</p>
+        <p class="track-artist" id="trackArtist"></p>
+        <div class="progress-container" title="Playback progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="control-button" title="Previous" id="prevBtn">⏮️</button>
+        <button class="control-button" title="Play/Pause" id="playPauseBtn">⏯️</button>
+        <button class="control-button" title="Next" id="nextBtn">⏭️</button>
+      </div>
+      <div id="loadingSpinner" class="spinner" style="display:none;" title="Loading album art"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Socials / Contact Details</h2>
+    <p>📧 Email: <a href="mailto:cruzy22k@gmail.com">cruzy22k@gmail.com</a></p>
+    <p>💬 Discord: <a href="https://discord.com/users/936511490133987348" target="_blank">Cruzy22k</a></p>
+    <p>🐙 GitHub: <a href="https://github.com/Cruzy22k" target="_blank">Cruzy22k</a></p>
+    <p>🎵 Spotify: <a href="https://open.spotify.com/user/z67qlp5xnzffpclvggcqgzc50?si=1362350c9af8431e" target="_blank">Cruzy22k</a></p>
+    <p>📊 Stats.fm: <a href="https://stats.fm/user/cruzy22k" target="_blank">Cruzy22k</a></p>
+  </section>
+
+  <section>
+    <h2>Explore more</h2>
+    <button onclick="window.location.href='/projects'" class="redirect-button">Projects!</button>
+  </section>
+
+  <script>
+  const fallbackTracks = [
+    {
+      title: 'PRIDE.',
+      artist: 'Kendrick Lamar',
+      albumArt: '/static/pride.jpg'
+    },
+    {
+      title: 'Rich Baby Daddy',
+      artist: 'Drake & SZA',
+      albumArt: '/static/richbabydaddy.jpg'
+    },
+    {
+      title: 'WAIT FOR U',
+      artist: 'Future & Tems',
+      albumArt: '/static/waitforu.jpg'
+    }
+  ];
+
+  let lastTrackId = null;
+  let progressMs = 0;
+  let durationMs = 180000; // fallback song duration (3 minutes)
+  let isUsingFallback = false;
+  let currentFallbackTrack = null;
+  let fallbackStartTime = 0;
+  let progressInterval = null;
+
+  async function updateSpotify() {
+    try {
+      const res = await fetch('/spotify-now');
+      const data = await res.json();
+
+      const validTrack = data.track && data.track.trim() !== '';
+
+      if (validTrack) {
+        isUsingFallback = false;
+        const trackId = data.track;
+
+        if (trackId !== lastTrackId) {
+          lastTrackId = trackId;
+          document.getElementById('albumArt').src = data.album_art_url || '/static/default.jpg';
+
+          if (data.track.includes(' - ')) {
+            const [title, artist] = data.track.split(' - ');
+            document.getElementById('trackName').textContent = title;
+            document.getElementById('trackArtist').textContent = artist;
+          } else {
+            document.getElementById('trackName').textContent = data.track;
+            document.getElementById('trackArtist').textContent = '';
+          }
+
+          progressMs = data.progress_ms || 0;
+          durationMs = data.duration_ms || 180000;
+        }
+      } else {
+        useFallbackTrack();
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      useFallbackTrack();
+    }
+  }
+
+  function useFallbackTrack() {
+    const now = Date.now();
+
+    // If no fallback active or 3 minutes passed, pick a new one
+    if (!isUsingFallback || (now - fallbackStartTime >= 180000)) {
+      isUsingFallback = true;
+      fallbackStartTime = now;
+      progressMs = 0;
+      durationMs = 180000;
+      currentFallbackTrack = fallbackTracks[Math.floor(Math.random() * fallbackTracks.length)];
+
+      document.getElementById('trackName').textContent = currentFallbackTrack.title;
+      document.getElementById('trackArtist').textContent = currentFallbackTrack.artist;
+      document.getElementById('albumArt').src = currentFallbackTrack.albumArt;
+    }
+  }
+
+  function updateProgressBar() {
+    if (isUsingFallback) {
+      progressMs = Date.now() - fallbackStartTime;
+    } else {
+      progressMs += 1000;
+    }
+
+    const percent = Math.min((progressMs / durationMs) * 100, 100);
+    document.getElementById('progressBar').style.width = percent + '%';
+
+    if (progressMs >= durationMs && isUsingFallback) {
+      useFallbackTrack(); // Load next fallback
+    }
+  }
+
+  // First run
+  updateSpotify();
+
+  // Poll Spotify every 15 seconds
+  setInterval(updateSpotify, 15000);
+
+  // Update progress bar every second
+  if (progressInterval) clearInterval(progressInterval);
+  progressInterval = setInterval(updateProgressBar, 1000);
+</script>
+
+
+
+</body>
+</html>
