@@ -12,11 +12,11 @@ app.secret_key = "not slick"
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s')
 
 CLIENT_ID = "nah ur not slick"
-CLIENT_SECRET = "nah ur not slick"
+CLIENT_SECRET = "low taper"
 REDIRECT_URI = "https://cruzy22k.pythonanywhere.com/callback"  # old shit
 SCOPE = "user-read-currently-playing user-read-playback-state"
 
-# Your 3 fallback tracks with titles, artists, and static image paths
+# fallback type ahh
 fallback_tracks = [
     {
         "title": "PRIDE",
